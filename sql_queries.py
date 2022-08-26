@@ -1,6 +1,5 @@
 import configparser
 
-
 # CONFIG
 config = configparser.ConfigParser()
 config.read('dwh.cfg')
@@ -18,24 +17,90 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 # CREATE TABLES
 
 staging_events_table_create= ("""
+    CREATE TABLE IF NOT EXISTS staging_events (
+        artist VARCHAR,
+        auth VARCHAR,
+        first_name VARCHAR,
+        gender CHAR(1),
+        item_in_session INT,
+        last_name VARCHAR,
+        length FLOAT,
+        level VARCHAR,
+        location VARCHAR,
+        method VARCHAR,
+        page VARCHAR,
+        registration BIGINT,
+        session_id INT,
+        song VARCHAR,
+        status INT,
+        ts TIMESTAMP,
+        user_agent VARCHAR,
+        user_id INT);
 """)
 
 staging_songs_table_create = ("""
+    CREATE TABLE IF NOT EXISTS staging_songs (
+        num_songs INT,
+        artist_id CHAR(18),
+        artist_latitude FLOAT,
+        artist_longitude FLOAT,
+        artist_location VARCHAR,
+        artist_name VARCHAR,
+        song_id CHAR(18),
+        title VARCHAR,
+        duration FLOAT,
+        year INT);
 """)
 
 songplay_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songplays (
+        songplay_id INT IDENTITY(0,1) PRIMARY KEY,
+        start_time TIMESTAMP NOT NULL,
+        user_id INT NOT NULL,
+        level VARCHAR NOT NULL,
+        song_id CHAR(18),
+        artist_id CHAR(18),
+        session_id INT NOT NULL,
+        location VARCHAR NOT NULL,
+        user_agent VARCHAR NOT NULL);
 """)
 
 user_table_create = ("""
+    CREATE TABLE IF NOT EXISTS users (
+        user_id INT PRIMARY KEY,
+        first_name VARCHAR,
+        last_name VARCHAR,
+        gender CHAR(1),
+        level VARCHAR);
 """)
 
 song_table_create = ("""
+    CREATE TABLE IF NOT EXISTS songs (
+        song_id CHAR(18) PRIMARY KEY,
+        title VARCHAR NOT NULL,
+        artist_id CHAR(18) NOT NULL,
+        year int NOT NULL,
+        duration FLOAT NOT NULL);
 """)
 
 artist_table_create = ("""
+    CREATE TABLE IF NOT EXISTS artists (
+        artist_id CHAR(18) PRIMARY KEY,
+        name VARCHAR NOT NULL,
+        location VARCHAR NOT NULL,
+        latitude FLOAT,
+        longitude FLOAT);
 """)
 
 time_table_create = ("""
+    CREATE TABLE IF NOT EXISTS time (
+        start_time TIMESTAMP PRIMARY KEY,
+        hour INT,
+        day INT,
+        week INT,
+        month INT,
+        year INT,
+        weekday INT);
 """)
 
 # STAGING TABLES
