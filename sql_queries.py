@@ -16,7 +16,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
 
-staging_events_table_create= ("""
+staging_events_table_create = """
     CREATE TABLE IF NOT EXISTS staging_events (
         artist VARCHAR,
         auth VARCHAR,
@@ -36,9 +36,9 @@ staging_events_table_create= ("""
         ts TIMESTAMP,
         user_agent VARCHAR,
         user_id INT);
-""")
+"""
 
-staging_songs_table_create = ("""
+staging_songs_table_create = """
     CREATE TABLE IF NOT EXISTS staging_songs (
         num_songs INT,
         artist_id CHAR(18),
@@ -50,58 +50,58 @@ staging_songs_table_create = ("""
         title VARCHAR,
         duration FLOAT,
         year INT);
-""")
+"""
 
-songplay_table_create = ("""
+songplay_table_create = """
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id INT IDENTITY(0,1) PRIMARY KEY,
         start_time TIMESTAMP NOT NULL,
         user_id INT NOT NULL,
         level VARCHAR NOT NULL,
         song_id CHAR(18),
-        artist_id CHAR(18),
+        artist_id CHAR(18) NOT NULL,
         session_id INT NOT NULL,
         location VARCHAR NOT NULL,
         user_agent VARCHAR NOT NULL);
-""")
+"""
 
-user_table_create = ("""
+user_table_create = """
     CREATE TABLE IF NOT EXISTS users (
-        user_id INT PRIMARY KEY,
+        user_id INT NOT NULL PRIMARY KEY,
         first_name VARCHAR,
         last_name VARCHAR,
         gender CHAR(1),
         level VARCHAR);
-""")
+"""
 
-song_table_create = ("""
+song_table_create = """
     CREATE TABLE IF NOT EXISTS songs (
-        song_id CHAR(18) PRIMARY KEY,
+        song_id CHAR(18) NOT NULL PRIMARY KEY,
         title VARCHAR NOT NULL,
         artist_id CHAR(18) NOT NULL,
         year int NOT NULL,
         duration FLOAT NOT NULL);
-""")
+"""
 
-artist_table_create = ("""
+artist_table_create = """
     CREATE TABLE IF NOT EXISTS artists (
-        artist_id CHAR(18) PRIMARY KEY,
+        artist_id CHAR(18) NOT NULL PRIMARY KEY,
         name VARCHAR NOT NULL,
-        location VARCHAR NOT NULL,
+        location VARCHAR,
         latitude FLOAT,
         longitude FLOAT);
-""")
+"""
 
-time_table_create = ("""
+time_table_create = """
     CREATE TABLE IF NOT EXISTS time (
-        start_time TIMESTAMP PRIMARY KEY,
+        start_time TIMESTAMP NOT NULL PRIMARY KEY,
         hour INT,
         day INT,
         week INT,
         month INT,
         year INT,
         weekday INT);
-""")
+"""
 
 # STAGING TABLES
 
