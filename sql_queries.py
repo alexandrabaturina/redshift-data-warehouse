@@ -128,20 +128,102 @@ staging_songs_copy = ("""
 
 # FINAL TABLES
 
-songplay_table_insert = ("""
-""")
+songplay_table_insert = """
+    INSERT INTO songplays (
+        start_time,
+        user_id,
+        level,
+        song_id,
+        artist_id,
+        session_id,
+        location,
+        user_agent)
+    SELECT
+        se.ts,
+        se.user_id,
+        se.level,
+        ss.song_id,
+        ss.artist_id,
+        se.session_id,
+        se.location,
+        se.user_agent
+    FROM staging_events se
+    JOIN staging_songs ss
+    ON (se.song = ss.title AND se.artist = ss.artist_name)
+    AND se.page = 'NextSong'
+"""
 
-user_table_insert = ("""
-""")
+user_table_insert = """
+    INSERT INTO users (
+        user_id,
+        first_name,
+        last_name,
+        gender,
+        level)
+    SELECT
+        user_id,
+        first_name,
+        last_name,
+        gender,
+        level
+    FROM staging_events
+    WHERE user_id IS NOT NULL
+"""
 
-song_table_insert = ("""
-""")
+song_table_insert = """
+    INSERT INTO songs (
+        song_id,
+        title,
+        artist_id,
+        year,
+        duration)
+    SELECT
+        song_id,
+        title,
+        artist_id,
+        year,
+        duration
+    FROM staging_songs
+    WHERE song_id IS NOT NULL
+"""
 
-artist_table_insert = ("""
-""")
+artist_table_insert = """
+    INSERT INTO artists (
+        artist_id,
+        name,
+        location,
+        latitude,
+        longitude)
+    SELECT
+        artist_id,
+        artist_name,
+        artist_location,
+        artist_latitude,
+        artist_longitude
+    FROM staging_songs
+    WHERE artist_id IS NOT NULL;
+"""
 
-time_table_insert = ("""
-""")
+time_table_insert = """
+    INSERT INTO time (
+        start_time,
+        hour, 
+        day,
+        week,
+        month,
+        year,
+        weekday)
+    SELECT
+        ts,
+        EXTRACT (HOUR FROM ts),
+        EXTRACT (DAY FROM ts),
+        EXTRACT (WEEK FROM ts),
+        EXTRACT (MONTH FROM ts),
+        EXTRACT (YEAR FROM ts),
+        EXTRACT (DAYOFWEEK from ts)
+    FROM staging_events
+    WHERE ts IS NOT NULL
+"""
 
 # QUERY LISTS
 
