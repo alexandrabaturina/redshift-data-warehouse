@@ -14,8 +14,12 @@ def drop_tables(cur, conn):
         no value
     """
     for query in drop_table_queries:
-        cur.execute(query)
-        conn.commit()
+        try:
+            cur.execute(query)
+            conn.commit()
+        except Exception as e:
+            print(e)
+    print('Tables are dropped.')
 
 
 def create_tables(cur, conn):
@@ -29,8 +33,12 @@ def create_tables(cur, conn):
         no value
     """
     for query in create_table_queries:
-        cur.execute(query)
-        conn.commit()
+        try:
+            cur.execute(query)
+            conn.commit()
+        except Exception as e:
+            print(e)
+    print('Tables are created.')
 
 
 def main():
