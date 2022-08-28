@@ -95,3 +95,15 @@ The ```staging_songs``` table has the following fields:
 * title: VARCHAR
 * duration: FLOAT
 * year: INT
+### Step 2: Analytics Tables
+The database for analytics team contains the following tables:
+* Fact table
+    * **songplays**: records in log data associated with song plays, i.e. records with page NextSong
+* Dimension tables
+    * **users**: users in the app
+    * **songs**: songs in music database
+    * **artists**: artists in music database
+    * **time**: timestamps of records in songplays broken down into specific units
+    
+The database schema is shown below. Primary and foreign keys are marked as ```PK``` and ```FK```, respectively.
+![image](https://user-images.githubusercontent.com/53233637/187092372-167da82f-756e-410c-bf3b-a67348ff814a.png)
