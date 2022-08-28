@@ -60,3 +60,38 @@ Below is an example of what a single line of a single file ```data/log_data/2018
   "userId":"42"
 }
 ```
+## Database Design
+### Step 1: Staging Tables
+On step 1, data is loaded from S3 into two staging tables.
+#### ```staging_events``` table
+The ```staging_event``` table has the following fields:
+* artist: VARCHAR
+* auth: VARCHAR
+* first_name: VARCHAR
+* gender: CHAR(1)
+* item_in_session: INT
+* last_name: VARCHAR
+* length: FLOAT
+* level: VARCHAR
+* location: VARCHAR
+* method: VARCHAR
+* page: VARCHAR
+* registration: BIGINT
+* session_id: INT
+* song: VARCHAR
+* status: INT
+* ts: TIMESTAMP
+* user_agent: VARCHAR
+* user_id: INT
+#### ```staging_songs``` table
+The ```staging_songs``` table has the following fields:
+* num_songs: INT
+* artist_id: CHAR(18)
+* artist_latitude: FLOAT
+* artist_longitude: FLOAT
+* artist_location: VARCHAR
+* artist_name: VARCHAR
+* song_id: CHAR(18)
+* title: VARCHAR
+* duration: FLOAT
+* year: INT
