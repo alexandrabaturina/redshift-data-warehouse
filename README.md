@@ -4,3 +4,8 @@
 * Extracts music streaming data from [Amazon S3](https://aws.amazon.com/s3/) buckets
 * Stages extracted data in [Redshift](https://aws.amazon.com/redshift/)
 * Transforms data into a set of dimensional tables for analytics team
+## Repo Contents
+The repo contains the following files:
+* ```create_tables.py```: drops existing tables and creates new ones.
+* ```etl.py```: loads data from S3 to Redshift staging tables, and inserts extracted data into analytics tables.
+* ```sql_queries.py```: contains all SQL queries.
