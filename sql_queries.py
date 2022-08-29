@@ -68,7 +68,8 @@ songplay_table_create = """
         artist_id CHAR(18) NOT NULL,
         session_id INT NOT NULL,
         location VARCHAR NOT NULL,
-        user_agent VARCHAR NOT NULL);
+        user_agent VARCHAR NOT NULL,
+        duration FLOAT);
 """
 
 user_table_create = """
@@ -137,7 +138,8 @@ songplay_table_insert = """
         artist_id,
         session_id,
         location,
-        user_agent)
+        user_agent,
+        duration)
     SELECT
         se.ts,
         se.user_id,
@@ -161,7 +163,7 @@ user_table_insert = """
         last_name,
         gender,
         level)
-    SELECT
+    SELECT DISTINCT
         user_id,
         first_name,
         last_name,
@@ -178,7 +180,7 @@ song_table_insert = """
         artist_id,
         year,
         duration)
-    SELECT
+    SELECT DISTINCT
         song_id,
         title,
         artist_id,
@@ -195,7 +197,7 @@ artist_table_insert = """
         location,
         latitude,
         longitude)
-    SELECT
+    SELECT DISTINCT
         artist_id,
         artist_name,
         artist_location,
