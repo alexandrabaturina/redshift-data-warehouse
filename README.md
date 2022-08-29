@@ -106,7 +106,8 @@ The database for analytics team contains the following tables:
     * **time**: timestamps of records in songplays broken down into specific units
     
 The database schema is shown below. Primary and foreign keys are marked as ```PK``` and ```FK```, respectively.
-![image](https://user-images.githubusercontent.com/53233637/187092372-167da82f-756e-410c-bf3b-a67348ff814a.png)
+![image](https://user-images.githubusercontent.com/53233637/187318753-c965452d-65ac-47b6-bcba-c34c623f989e.png)
+
 ## Getting Started
 ### Prerequisites
 To run ETL, it's required to launch a Redshift cluster and create an IAM role that has read access to S3. The data should be saved in ```dwh.cfg``` file. Below is an example of what ```dwh.cfg``` looks like.
