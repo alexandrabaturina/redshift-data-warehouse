@@ -4,6 +4,15 @@ from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
+    """
+    Function to load data from S3 into Redshift staging tables.
+
+    Args:
+        cur (refcursor): Cursor to execute database queries
+        conn (object): Database connection object
+    Returns:
+        no value
+    """
     print('Loading staging tables...')
     total = len(copy_table_queries)
     count = 0
@@ -19,6 +28,15 @@ def load_staging_tables(cur, conn):
 
 
 def insert_tables(cur, conn):
+    """
+    Function to insert data into Redshift analytics tables.
+
+    Args:
+        cur (refcursor): Cursor to execute database queries
+        conn (object): Database connection object
+    Returns:
+        no value
+    """
     print('Insert data into analytics tables...')
     total = len(insert_table_queries)
     count = 0
