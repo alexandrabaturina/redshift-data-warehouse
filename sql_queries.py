@@ -113,7 +113,7 @@ time_table_create = """
 
 staging_events_copy = """
     copy staging_events from {}
-    credentials 'aws_iam_role={}'
+    iam_role {}
     region 'us-west-2'
     json {}
     timeformat 'epochmillisecs'
@@ -121,7 +121,7 @@ staging_events_copy = """
 
 staging_songs_copy = """
     copy staging_songs from {}
-    credentials 'aws_iam_role={}'
+    iam_role {}
     json 'auto'
     region 'us-west-2'
 """.format(SONG_DATA, ARN)
