@@ -146,7 +146,8 @@ songplay_table_insert = """
         ss.artist_id,
         se.session_id,
         se.location,
-        se.user_agent
+        se.user_agent,
+        ss.duration
     FROM staging_events se
     JOIN staging_songs ss
     ON (se.song = ss.title AND se.artist = ss.artist_name)
