@@ -107,3 +107,49 @@ The database for analytics team contains the following tables:
     
 The database schema is shown below. Primary and foreign keys are marked as ```PK``` and ```FK```, respectively.
 ![image](https://user-images.githubusercontent.com/53233637/187092372-167da82f-756e-410c-bf3b-a67348ff814a.png)
+## Getting Started
+### Prerequisites
+To run ETL, it's required to launch a Redshift cluster and create an IAM role that has read access to S3. The data should be saved in ```dwh.cfg``` file. Below is an example of what ```dwh.cfg``` looks like.
+```
+[CLUSTER]
+HOST=YOUR_HOST
+DB_NAME=YOUR_DATABASE_NAME
+DB_USER=YOUR_DATABASE_USER
+DB_PASSWORD=YOUR_DATABASE_PASSWORK
+DB_PORT=YOUR_DATABASE_PORT
+
+[IAM_ROLE]
+ARN=YOUR_IAM_ROLE
+
+[S3]
+LOG_DATA='s3://udacity-dend/log_data'
+LOG_JSONPATH='s3://udacity-dend/log_json_path.json'
+SONG_DATA='s3://udacity-dend/song_data'
+```
+### Running ETL Locally
+To run ETL locally,
+1. Clone this repo.
+2. ```cd``` into project directory.
+3. Put ```dwh.cfg``` into project directory.
+4. Run ```create_tables.py``` to reset tables.
+```
+root@1a2dc16602ee:/home/workspace# python create_tables.py 
+Tables are dropped.
+Tables are created.
+```
+> Remember to run create_tables.py every time before running etl.py to reset tables.
+5. Run ```etl.py```. Query execution progress is displayed in terminal.
+```
+root@1a2dc16602ee:/home/workspace# python etl.py
+Loading staging tables...
+Query 1 of 2 executed.
+Query 2 of 2 executed.
+Insert data into analytics tables...
+Query 1 of 5 executed.
+Query 2 of 5 executed.
+Query 3 of 5 executed.
+Query 4 of 5 executed.
+Query 5 of 5 executed.
+```
+## Authors
+[Alexandra Baturina](https://www.linkedin.com/in/alexandrabaturina/)
